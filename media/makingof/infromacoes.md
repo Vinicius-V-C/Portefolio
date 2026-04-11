@@ -191,9 +191,9 @@ Cada atributo foi definido com base na sua utilidade prática dentro da aplicaç
 
 As relações N:N foram utilizadas sempre que uma entidade pode estar associada a múltiplas instâncias de outra.
 
-Exemplo:
-- Um projeto usa várias tecnologias  
-- Uma tecnologia é usada em vários projetos  
+Exemplos:
+- Um projeto utiliza várias tecnologias  
+- Uma tecnologia pode ser utilizada em vários projetos  
 
 ---
 
@@ -223,6 +223,20 @@ Durante este processo:
 - foram adicionados novos atributos (ex: link_pdf, palavras-chave)  
 
 Os dados foram carregados com sucesso e validados no Django Admin.
+
+---
+
+## CARREGAMENTO DE UNIDADES CURRICULARES
+
+Foi desenvolvido um script (`load_ucs.py`) para inserir automaticamente unidades curriculares na base de dados.
+
+Inicialmente foi tentada a utilização da API da Universidade Lusófona, no entanto, esta não se encontrava disponível (erro 404).
+
+Como alternativa, foram utilizados dados simulados para garantir o funcionamento do sistema.
+
+As unidades curriculares foram corretamente associadas à licenciatura através de uma relação ForeignKey.
+
+Os dados foram validados no Django Admin.
 
 ---
 
