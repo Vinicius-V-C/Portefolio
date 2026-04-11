@@ -11,7 +11,28 @@ admin.site.register(TFC)
 admin.site.register(MakingOf)
 admin.site.register(Tecnologia)
 admin.site.register(Competencia)
-admin.site.register(Projeto)
-admin.site.register(UnidadeCurricular)
-admin.site.register(Docente)
 admin.site.register(Licenciatura)
+
+
+class ProjetoAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'unidade_curricular')
+    search_fields = ('nome',)
+
+
+admin.site.register(Projeto, ProjetoAdmin)
+
+
+class UnidadeCurricularAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'ano', 'semestre')
+    search_fields = ('nome',)
+
+
+admin.site.register(UnidadeCurricular, UnidadeCurricularAdmin)
+
+
+class DocenteAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'email')
+    search_fields = ('nome',)
+
+
+admin.site.register(Docente, DocenteAdmin)
