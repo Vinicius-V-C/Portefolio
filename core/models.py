@@ -29,4 +29,39 @@ class UnidadeCurricular(models.Model):
     docentes = models.ManyToManyField(Docente)
 
     def __str__(self):
-        return self.nome        
+        return self.nome
+
+class Tecnologia(models.Model):
+    nome = models.CharField(max_length=100)
+    tipo = models.CharField(max_length=50)
+    descricao = models.TextField()
+    logotipo = models.ImageField(upload_to='tecnologias/')
+    site_oficial = models.URLField()
+    nivel_interesse = models.IntegerField()
+
+    def __str__(self):
+        return self.nome
+
+
+class Competencia(models.Model):
+    nome = models.CharField(max_length=100)
+    nivel = models.CharField(max_length=50)
+    descricao = models.TextField()
+
+    def __str__(self):
+        return self.nome
+
+
+class Projeto(models.Model):
+    nome = models.CharField(max_length=100)
+    descricao = models.TextField()
+    imagem = models.ImageField(upload_to='projetos/')
+    video_demo = models.URLField()
+    github_link = models.URLField()
+
+    unidade_curricular = models.ForeignKey(UnidadeCurricular, on_delete=models.CASCADE)
+    tecnologias = models.ManyToManyField(Tecnologia)
+    competencias = models.ManyToManyField(Competencia)
+
+    def __str__(self):
+        return self.nome                
