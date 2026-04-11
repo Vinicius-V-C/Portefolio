@@ -93,11 +93,19 @@ class ExperienciaProfissional(models.Model):
 
 class TFC(models.Model):
     titulo = models.CharField(max_length=200)
-    descricao = models.TextField()
-    ano = models.IntegerField()
-    classificacao = models.FloatField()
+    ano = models.CharField(max_length=20)
+    licenciatura = models.CharField(max_length=200)
 
-    tecnologias = models.ManyToManyField(Tecnologia)
+    sumario = models.TextField()
+
+    link_pdf = models.URLField(null=True, blank=True)
+    imagem = models.URLField(null=True, blank=True)
+
+    palavras_chave = models.TextField(blank=True)
+    areas = models.TextField(blank=True)
+    tecnologias = models.TextField(blank=True)
+
+    rating = models.IntegerField()
 
     def __str__(self):
         return self.titulo
@@ -116,5 +124,4 @@ class MakingOf(models.Model):
 
     def __str__(self):
         return self.descricao[:30]
-        
-                                
+

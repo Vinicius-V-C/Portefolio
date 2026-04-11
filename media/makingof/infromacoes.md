@@ -10,14 +10,16 @@
 - Formacao  
 - Docente  
 - MakingOf  
-- (Extra) ExperienciaProfissional, Decidi incluir ExperienciaProfissional para enriquecer o portfólio além do contexto académico.
+- (Extra) ExperienciaProfissional  
+
+A entidade ExperienciaProfissional foi incluída para enriquecer o portfólio, permitindo representar experiências além do contexto académico.
 
 ---
 
 ## ATRIBUTOS:
 
 ### Observação:
-Ao declarar os atributos de cada entidade, coloquei o atributo e, separado por vírgula, expliquei o porquê da sua existência.
+Cada atributo foi definido com base na sua utilidade prática dentro da aplicação.
 
 ---
 
@@ -29,89 +31,94 @@ Ao declarar os atributos de cada entidade, coloquei o atributo e, separado por v
 - descricao, permite adicionar informação relevante  
 
 **Justificações:**
-- O atributo nome foi incluído para identificar claramente o curso frequentado.  
-- O atributo instituicao permite contextualizar academicamente o percurso.  
+- O atributo nome identifica claramente o curso frequentado.  
+- O atributo instituicao contextualiza o percurso académico.  
 
 ---
 
 ### Entidade: UnidadeCurricular
 - id  
-- nome, identifica claramente a UC  
-- descricao, permite explicar o conteúdo  
-- ano, organiza cronologicamente  
-- semestre, organiza cronologicamente  
-- imagem, melhora a apresentação visual  
+- nome  
+- descricao  
+- ano  
+- semestre  
+- imagem  
 
 **Justificações:**
-- O atributo ano e semestre foram incluídos para organizar as UCs ao longo do percurso académico.  
-- O atributo imagem foi adicionado para enriquecer a componente visual da aplicação.  
+- Ano e semestre permitem organização cronológica.  
+- A imagem melhora a apresentação visual da aplicação.  
 
 ---
 
 ### Entidade: Docente
 - id  
 - nome  
-- email, permite contacto  
-- pagina_lusofona, ligação oficial  
-- foto, parte visual  
+- email  
+- pagina_lusofona  
+- foto  
 
 **Justificações:**
-- O atributo email permite estabelecer contacto com o docente.  
-- O atributo pagina_lusofona garante uma ligação oficial à instituição.  
+- O email permite contacto direto.  
+- A página Lusófona garante ligação oficial.  
 
 ---
 
 ### Entidade: Projeto
 - id  
 - nome  
-- descricao, permite explicar o conteúdo  
-- imagem, melhora a apresentação visual  
-- video_demo, demonstra o funcionamento  
-- github_link, importante para contexto profissional  
+- descricao  
+- imagem  
+- video_demo  
+- github_link  
 
 **Justificações:**
-- O atributo github_link foi incluído por ser relevante em contexto profissional.  
-- O atributo video_demo permite demonstrar visualmente o funcionamento do projeto.  
+- O GitHub é essencial em contexto profissional.  
+- O vídeo permite demonstrar o funcionamento.  
 
 ---
 
 ### Entidade: Tecnologia
 - id  
 - nome  
-- tipo (linguagem, framework, etc.), permite melhor organização  
-- descricao, permite explicar brevemente  
-- logotipo, parte visual  
-- site_oficial, fonte de referência  
-- nivel_interesse (1-5), indica nível de conhecimento/interesse  
+- tipo  
+- descricao  
+- logotipo  
+- site_oficial  
+- nivel_interesse  
 
 **Justificações:**
-- O atributo tipo permite categorizar as tecnologias.  
-- O atributo nivel_interesse foi incluído para representar o nível de domínio.  
+- O tipo permite organização (linguagem, framework, etc.).  
+- O nível de interesse representa domínio/conhecimento.  
 
 ---
 
 ### Entidade: TFC
 - id  
 - titulo  
-- descricao, permite explicar o conteúdo  
-- ano, organiza cronologicamente  
-- classificacao, permite destacar desempenho  
+- descricao  
+- ano  
+- classificacao  
+- licenciatura  
+- link_pdf  
+- imagem  
+- palavras_chave  
 
 **Justificações:**
-- O atributo classificacao permite destacar os melhores trabalhos.  
-- O atributo ano permite organizar os TFCs temporalmente.  
+- O atributo classificacao permite destacar desempenho.  
+- O link_pdf permite acesso direto ao trabalho.  
+- As palavras-chave facilitam pesquisa e organização.  
 
 ---
 
 ### Entidade: Competencia
 - id  
 - nome  
-- nivel (iniciante/intermedio/avancado), representa o nível  
-- descricao, explica a competência  
+- nivel  
+- descricao  
 
 **Justificações:**
-- O atributo nivel foi incluído para diferenciar o grau de domínio.  
-- O atributo descricao permite detalhar cada competência.  
+- O nível diferencia grau de domínio.  
+- A descrição detalha a competência.  
 
 ---
 
@@ -121,11 +128,11 @@ Ao declarar os atributos de cada entidade, coloquei o atributo e, separado por v
 - instituicao  
 - data_inicio  
 - data_fim  
-- descricao, descreve o que foi aprendido  
+- descricao  
 
 **Justificações:**
-- Os atributos data_inicio e data_fim permitem organizar cronologicamente as formações.  
-- O atributo descricao permite detalhar os conteúdos adquiridos.  
+- Datas permitem organização temporal.  
+- A descrição detalha os conteúdos adquiridos.  
 
 ---
 
@@ -133,29 +140,28 @@ Ao declarar os atributos de cada entidade, coloquei o atributo e, separado por v
 - id  
 - empresa  
 - cargo  
-- descricao, descreve funções desempenhadas  
+- descricao  
 - data_inicio  
 - data_fim  
-- aprendizagem, evidencia conhecimentos adquiridos  
+- aprendizagem  
 
 **Justificações:**
-- O atributo aprendizagem foi incluído para destacar o crescimento profissional.  
-- Os atributos datas permitem organizar a experiência ao longo do tempo.  
+- O atributo aprendizagem evidencia evolução profissional.  
 
 ---
 
 ### Entidade: MakingOf
 - id  
-- descricao, explica o processo realizado  
-- data, organiza cronologicamente  
-- imagem, comprova o trabalho realizado  
-- decisao, regista decisões tomadas  
-- erro, evidencia dificuldades  
-- correcao, demonstra aprendizagem  
+- descricao  
+- data  
+- imagem  
+- decisao  
+- erro  
+- correcao  
 
 **Justificações:**
-- O atributo erro foi incluído para evidenciar dificuldades encontradas.  
-- O atributo correcao permite demonstrar o processo de aprendizagem.  
+- Permite documentar o processo de desenvolvimento.  
+- Regista decisões, erros e aprendizagens.  
 
 ---
 
@@ -183,115 +189,55 @@ Ao declarar os atributos de cada entidade, coloquei o atributo e, separado por v
 
 ## EXPLICAÇÕES DAS RELAÇÕES:
 
-### Projeto ↔ Tecnologia:
-Um projeto pode utilizar várias tecnologias e uma tecnologia pode ser usada em vários projetos, justificando a relação N:N.
+As relações N:N foram utilizadas sempre que uma entidade pode estar associada a múltiplas instâncias de outra.
 
-### UnidadeCurricular ↔ Docente:
-Uma unidade curricular pode ter vários docentes e um docente pode lecionar várias unidades curriculares.
-
-### Projeto ↔ Competencia:
-Os projetos desenvolvem competências, sendo possível associar várias competências a um projeto.
-
-### Tecnologia ↔ Competencia:
-O conhecimento de uma tecnologia contribui para o desenvolvimento de competências.
-
-### Formacao / Experiencia ↔ Competencia:
-Formações e experiências profissionais contribuem diretamente para o desenvolvimento de competências.
-
-### TFC ↔ Tecnologia:
-Os trabalhos finais de curso utilizam tecnologias, tal como os projetos.
+Exemplo:
+- Um projeto usa várias tecnologias  
+- Uma tecnologia é usada em vários projetos  
 
 ---
 
 ## JUSTIFICAÇÕES DE MODELAGEM:
 
-Inicialmente, a tecnologia foi considerada como atributo dos projetos, mas foi posteriormente alterada para uma relação ManyToMany, por representar melhor a realidade.
+Inicialmente, algumas relações foram modeladas como 1:N, mas foram corrigidas para N:N após análise mais detalhada.
 
-A entidade ExperienciaProfissional foi adicionada para enriquecer o portfólio e não limitar a informação apenas ao contexto académico.
+A entidade Tecnologia foi separada de Projeto para evitar redundância e melhorar a normalização.
 
-A entidade MakingOf foi criada para documentar o processo de desenvolvimento, permitindo registar decisões, erros e correções.
+A entidade ExperienciaProfissional foi adicionada para enriquecer o portfólio.
 
----
-
-## MAKING OF:
-
-### Processo de Modelação:
-
-A modelação foi iniciada com um rascunho no papel, onde foram definidas as entidades e algumas relações principais de forma inicial.
-
-Posteriormente, foi utilizada uma ferramenta de IA para gerar o código em PlantUML com base nesse rascunho, permitindo criar um diagrama mais organizado e visual.
-
-Durante esse processo, o modelo foi sendo ajustado progressivamente.
+A entidade MakingOf foi criada para documentar o processo de desenvolvimento.
 
 ---
 
-### Evolução do Modelo:
+## CARREGAMENTO DE DADOS (TFCs)
 
-Versão 1:  
-Modelo inicial feito em papel com definição das entidades.
+Foi utilizado um ficheiro JSON contendo dados reais de TFCs.
 
-Versão 2:  
-Conversão para PlantUML, permitindo visualizar melhor a estrutura.
+Foi desenvolvido um script Python (`load_tfcs.py`) que:
+- lê o ficheiro JSON  
+- processa os dados  
+- insere na base de dados utilizando o ORM do Django  
 
-Versão 3:  
-Ajustes nas relações entre entidades, especialmente nas relações N:N.
+Durante este processo:
+- foi necessário adaptar o modelo TFC  
+- foram adicionados novos atributos (ex: link_pdf, palavras-chave)  
 
----
-
-### Erros e Correções:
-
-Erro: Inicialmente algumas relações foram definidas como 1:N quando na realidade deveriam ser N:N.  
-Correção: Após análise e discussão com colegas, essas relações foram corrigidas para ManyToMany.
-
-Erro: Dificuldade em compreender corretamente as ligações entre entidades.  
-Correção: Foram realizados ajustes progressivos e validações até obter uma modelação coerente.
+Os dados foram carregados com sucesso e validados no Django Admin.
 
 ---
 
-### Dificuldades e Dúvidas:
+## DJANGO ADMIN
 
-A principal dificuldade encontrada foi na definição das relações entre entidades.
+O Django Admin foi configurado para melhorar a usabilidade:
 
-Houve dúvidas na escolha entre relações 1:N e N:N, sendo necessário discutir com colegas para chegar a uma solução mais correta.
+- list_display para visualizar campos importantes  
+- search_fields para permitir pesquisa  
+- list_filter para facilitar navegação  
 
----
+Exemplo:
 
-### Decisões de Modelação:
-
-Foi tomada a decisão de ajustar várias relações ao longo do processo, após perceber que algumas não representavam corretamente a realidade.
-
-Seguindo uma abordagem semelhante ao exemplo analisado, optou-se por simplificar algumas ligações do MakingOf, de forma a evitar complexidade excessiva na futura implementação em Django.
-
----
-
-### Uso de Inteligência Artificial:
-
-Foi utilizada Inteligência Artificial como apoio na geração do código PlantUML a partir do rascunho inicial.
-
-A IA foi também utilizada como suporte para validar a modelação, embora todas as decisões tenham sido analisadas manualmente.
-
----
-
-### Ferramentas Utilizadas:
-
-- PlantUML  
-- GitHub  
-- Django  
-
----
-
-## REGISTOS VISUAIS:
-
-### Versão Inicial:
-![DER inicial](media/makingof/DerBasico.png)
-
-### Versão Final:
-![DER final](media/makingof/Der.png)
-
----
-
-## APONTAMENTOS FINAIS:
-
-O modelo foi pensado para ser flexível e permitir evolução ao longo do tempo, acompanhando o crescimento académico e profissional.
-
-Alguns atributos e relações poderão ser ajustados futuramente conforme novas necessidades do portfólio.
+```python
+class TFCAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'ano', 'classificacao')
+    search_fields = ('titulo',)
+    list_filter = ('ano',)
