@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("core", "0004_competencia_tecnologia_projeto"),
+        ("portefolio", "0004_competencia_tecnologia_projeto"),
     ]
 
     operations = [
@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
                 ("data_inicio", models.DateField()),
                 ("data_fim", models.DateField()),
                 ("aprendizagem", models.TextField()),
-                ("competencias", models.ManyToManyField(to="core.competencia")),
+                ("competencias", models.ManyToManyField(to="portefolio.competencia")),
             ],
         ),
         migrations.CreateModel(
@@ -73,7 +73,7 @@ class Migration(migrations.Migration):
                 ("data_inicio", models.DateField()),
                 ("data_fim", models.DateField()),
                 ("descricao", models.TextField()),
-                ("competencias", models.ManyToManyField(to="core.competencia")),
+                ("competencias", models.ManyToManyField(to="portefolio.competencia")),
             ],
         ),
         migrations.CreateModel(
@@ -100,7 +100,7 @@ class Migration(migrations.Migration):
                         blank=True,
                         null=True,
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="core.projeto",
+                        to="portefolio.projeto",
                     ),
                 ),
                 (
@@ -109,7 +109,7 @@ class Migration(migrations.Migration):
                         blank=True,
                         null=True,
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="core.tecnologia",
+                        to="portefolio.tecnologia",
                     ),
                 ),
                 (
@@ -118,7 +118,7 @@ class Migration(migrations.Migration):
                         blank=True,
                         null=True,
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="core.unidadecurricular",
+                        to="portefolio.unidadecurricular",
                     ),
                 ),
             ],

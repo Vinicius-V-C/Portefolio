@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("core", "0002_docente"),
+        ("portefolio", "0002_docente"),
     ]
 
     operations = [
@@ -28,12 +28,12 @@ class Migration(migrations.Migration):
                 ("ano", models.IntegerField()),
                 ("semestre", models.IntegerField()),
                 ("imagem", models.ImageField(upload_to="ucs/")),
-                ("docentes", models.ManyToManyField(to="core.docente")),
+                ("docentes", models.ManyToManyField(to="portefolio.docente")),
                 (
                     "licenciatura",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="core.licenciatura",
+                        to="portefolio.licenciatura",
                     ),
                 ),
             ],

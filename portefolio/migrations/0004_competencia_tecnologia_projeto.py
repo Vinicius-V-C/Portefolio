@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("core", "0003_unidadecurricular"),
+        ("portefolio", "0003_unidadecurricular"),
     ]
 
     operations = [
@@ -65,15 +65,15 @@ class Migration(migrations.Migration):
                 ("imagem", models.ImageField(upload_to="projetos/")),
                 ("video_demo", models.URLField()),
                 ("github_link", models.URLField()),
-                ("competencias", models.ManyToManyField(to="core.competencia")),
+                ("competencias", models.ManyToManyField(to="portefolio.competencia")),
                 (
                     "unidade_curricular",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="core.unidadecurricular",
+                        to="portefolio.unidadecurricular",
                     ),
                 ),
-                ("tecnologias", models.ManyToManyField(to="core.tecnologia")),
+                ("tecnologias", models.ManyToManyField(to="portefolio.tecnologia")),
             ],
         ),
     ]
