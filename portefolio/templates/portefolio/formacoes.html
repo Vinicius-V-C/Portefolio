@@ -1,0 +1,33 @@
+{% extends 'portefolio/base.html' %}
+
+{% block content %}
+
+<h1>Formações</h1>
+
+<a href="{% url 'criar_formacao' %}">
+    <button>Criar Formação</button>
+</a>
+
+<hr>
+
+{% for formacao in formacoes %}
+
+    <div>
+
+        <h2>{{ formacao.nome }}</h2>
+
+        <a href="{% url 'editar_formacao' formacao.id %}">
+            <button>Editar</button>
+        </a>
+
+        <a href="{% url 'apagar_formacao' formacao.id %}">
+            <button>Apagar</button>
+        </a>
+
+    </div>
+
+    <hr>
+
+{% endfor %}
+
+{% endblock %}
