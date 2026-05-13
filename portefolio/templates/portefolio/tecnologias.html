@@ -2,26 +2,32 @@
 
 {% block content %}
 
-<h2>Tecnologias</h2>
+<h1>Tecnologias</h1>
+
+<a href="{% url 'criar_tecnologia' %}">
+    <button>Criar Tecnologia</button>
+</a>
+
+<hr>
 
 {% for tecnologia in tecnologias %}
-    <article>
-        <h3>{{ tecnologia.nome }}</h3>
 
-        <p>{{ tecnologia.tipo }}</p>
+    <div>
 
-        <p>{{ tecnologia.descricao }}</p>
+        <h2>{{ tecnologia.nome }}</h2>
 
-        <p>
-            <a href="{{ tecnologia.site_oficial }}">
-                Site oficial
-            </a>
-        </p>
+        <a href="{% url 'editar_tecnologia' tecnologia.id %}">
+            <button>Editar</button>
+        </a>
 
-        <p>Nível de interesse: {{ tecnologia.nivel_interesse }}</p>
-    </article>
+        <a href="{% url 'apagar_tecnologia' tecnologia.id %}">
+            <button>Apagar</button>
+        </a>
+
+    </div>
 
     <hr>
+
 {% endfor %}
 
 {% endblock %}
