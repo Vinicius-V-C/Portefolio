@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import (
     Licenciatura,
@@ -318,4 +318,11 @@ def apagar_formacao(request, formacao_id):
 
     return render(request, 'portefolio/confirmar_delete.html', {
         'objeto': formacao
-    })            
+    })
+    
+def sobre(request):
+    return render(request, 'portefolio/sobre.html')
+
+
+def makingof(request):
+    return render(request, 'portefolio/makingof.html')                

@@ -25,5 +25,7 @@ urlpatterns = [
     path('formacoes/criar/', views.criar_formacao, name='criar_formacao'),
     path('formacoes/editar/<int:formacao_id>/', views.editar_formacao, name='editar_formacao'),
     path('formacoes/apagar/<int:formacao_id>/', views.apagar_formacao, name='apagar_formacao'),
+    path('sobre/', views.sobre, name='sobre'),
+    path('makingof/', views.makingof, name='makingof'),
 
 ]

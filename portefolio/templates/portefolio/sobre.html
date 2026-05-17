@@ -1,0 +1,86 @@
+{% extends 'portefolio/base.html' %}
+
+{% block content %}
+
+<h1>Sobre esta aplicação</h1>
+
+<h2>1. Arquitetura MVT do Django</h2>
+
+<p>
+Esta aplicação foi desenvolvida usando a arquitetura MVT do Django:
+</p>
+
+<ul>
+    <li><strong>Model</strong> → representa os dados da aplicação.</li>
+    <li><strong>View</strong> → trata a lógica da aplicação.</li>
+    <li><strong>Template</strong> → apresenta as páginas HTML.</li>
+</ul>
+
+<p>
+O utilizador faz pedidos através do navegador.
+As views recebem esses pedidos, comunicam com os models
+e devolvem páginas HTML usando templates.
+</p>
+
+<hr>
+
+<h2>2. Modelação</h2>
+
+<p>
+A aplicação possui modelos para:
+</p>
+
+<ul>
+    <li>Projetos</li>
+    <li>Tecnologias</li>
+    <li>Competências</li>
+    <li>Formações</li>
+</ul>
+
+<p>
+Os modelos estão definidos no ficheiro <strong>models.py</strong>.
+</p>
+
+<hr>
+
+<h2>3. Tecnologias</h2>
+
+<ul>
+    <li>Django</li>
+    <li>Python</li>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>SQLite</li>
+    <li>Git</li>
+    <li>GitHub</li>
+</ul>
+
+<hr>
+
+<h2>4. Estrutura das páginas</h2>
+
+<p>
+A aplicação possui páginas para:
+</p>
+
+<ul>
+    <li>Projetos</li>
+    <li>Tecnologias</li>
+    <li>Competências</li>
+    <li>Formações</li>
+    <li>Making Of</li>
+</ul>
+
+<hr>
+
+<h2>5. Repositório GitHub</h2>
+
+<p>
+Link do repositório:
+</p>
+
+<a href="https://github.com/SEU_GITHUB" target="_blank">
+    GitHub
+</a>
+
+{% endblock %}
