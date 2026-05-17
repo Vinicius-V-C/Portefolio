@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'portefolio',
     'escola',
+    'markdownify',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,16 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'), 
 ]
+
+MARKDOWNIFY = {
+    "default": {
+        "WHITELIST_TAGS": [
+            'a', 'abbr', 'acronym',
+            'strong', 'b',
+            'blockquote', 'em', 'i',
+            'ul', 'li', 'ol',
+            'p',
+            'h1', 'h2', 'h3', 'h4',
+        ]
+    }
+}
