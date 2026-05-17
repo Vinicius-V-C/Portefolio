@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'escola',
     'markdownify',
     'accounts',
+    'sesame',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,12 @@ MARKDOWNIFY = {
 }
 
 LOGIN_URL = '/accounts/login/'
+
+AUTHENTICATION_BACKENDS = [
+
+    'django.contrib.auth.backends.ModelBackend',
+
+    'sesame.backends.ModelBackend',
+
+]
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

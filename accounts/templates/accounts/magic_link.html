@@ -1,0 +1,19 @@
+<h1>Login por link mágico</h1>
+
+{% if enviado %}
+    <p>Email enviado com sucesso!</p>
+{% endif %}
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <input type="email"
+           name="email"
+           placeholder="email">
+
+    <button type="submit">
+        Enviar link
+    </button>
+
+</form>
