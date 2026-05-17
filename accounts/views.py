@@ -55,6 +55,8 @@ def registo_view(request):
 
 def magic_link(request):
 
+    enviado = False
+
     if request.method == 'POST':
 
         email = request.POST.get('email')
@@ -77,13 +79,14 @@ def magic_link(request):
                 fail_silently=False,
             )
 
-            return render(request,
-                          'accounts/magic_enviado.html')
+            enviado = True
 
         except User.DoesNotExist:
 
             pass
 
-    return render(request,
-              'accounts/magic_link.html',
-              {'enviado': True})                
+    return render(
+        request,
+        'accounts/magic_link.html',
+        {'enviado': enviado}
+    )              
