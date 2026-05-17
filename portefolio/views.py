@@ -326,3 +326,20 @@ def sobre(request):
 
 def makingof(request):
     return render(request, 'portefolio/makingof.html')                
+
+def makingof(request):
+
+    texto = """
+# Título Markdown
+
+## Sub-título
+
+- item 1
+- item 2
+
+**bold**
+"""
+
+    return render(request,
+                  'portefolio/makingof.html',
+                  {'texto': texto})    
