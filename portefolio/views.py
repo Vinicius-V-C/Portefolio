@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from .models import (
     Licenciatura,
@@ -18,6 +19,8 @@ from .forms import (
     CompetenciaForm,
     FormacaoForm
 )
+
+
 
 
 def licenciaturas_view(request):
@@ -116,6 +119,7 @@ def makingof_view(request):
         'makingofs': makingofs
     })
 
+@login_required
 def criar_projeto(request):
 
     if request.method == 'POST':
@@ -133,6 +137,7 @@ def criar_projeto(request):
         'titulo': 'Criar Projeto'
     }) 
 
+@login_required
 def editar_projeto(request, projeto_id):
 
     projeto = get_object_or_404(Projeto, id=projeto_id)
@@ -152,6 +157,7 @@ def editar_projeto(request, projeto_id):
         'titulo': 'Editar Projeto'
     })
 
+@login_required
 def apagar_projeto(request, projeto_id):
 
     projeto = get_object_or_404(Projeto, id=projeto_id)
@@ -164,6 +170,7 @@ def apagar_projeto(request, projeto_id):
         'objeto': projeto
     })           
 
+@login_required
 def criar_tecnologia(request):
 
     if request.method == 'POST':
@@ -182,7 +189,7 @@ def criar_tecnologia(request):
     })
 
 
-
+@login_required
 def editar_tecnologia(request, tecnologia_id):
 
     tecnologia = get_object_or_404(Tecnologia, id=tecnologia_id)
@@ -203,7 +210,7 @@ def editar_tecnologia(request, tecnologia_id):
     })
 
 
-
+@login_required
 def apagar_tecnologia(request, tecnologia_id):
 
     tecnologia = get_object_or_404(Tecnologia, id=tecnologia_id)
@@ -216,6 +223,7 @@ def apagar_tecnologia(request, tecnologia_id):
         'objeto': tecnologia
     })
 
+@login_required
 def criar_competencia(request):
 
     if request.method == 'POST':
@@ -234,7 +242,7 @@ def criar_competencia(request):
     })
 
 
-
+@login_required
 def editar_competencia(request, competencia_id):
 
     competencia = get_object_or_404(Competencia, id=competencia_id)
@@ -255,7 +263,7 @@ def editar_competencia(request, competencia_id):
     })
 
 
-
+@login_required
 def apagar_competencia(request, competencia_id):
 
     competencia = get_object_or_404(Competencia, id=competencia_id)
@@ -268,6 +276,7 @@ def apagar_competencia(request, competencia_id):
         'objeto': competencia
     })
 
+@login_required
 def criar_formacao(request):
 
     if request.method == 'POST':
@@ -286,7 +295,7 @@ def criar_formacao(request):
     })
 
 
-
+@login_required
 def editar_formacao(request, formacao_id):
 
     formacao = get_object_or_404(Formacao, id=formacao_id)
@@ -307,7 +316,7 @@ def editar_formacao(request, formacao_id):
     })
 
 
-
+@login_required
 def apagar_formacao(request, formacao_id):
 
     formacao = get_object_or_404(Formacao, id=formacao_id)
@@ -322,10 +331,7 @@ def apagar_formacao(request, formacao_id):
     
 def sobre(request):
     return render(request, 'portefolio/sobre.html')
-
-
-def makingof(request):
-    return render(request, 'portefolio/makingof.html')                
+        
 
 def makingof(request):
 

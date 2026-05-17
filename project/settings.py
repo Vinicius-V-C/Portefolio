@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'portefolio',
     'escola',
     'markdownify',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,5 @@ MARKDOWNIFY = {
         ]
     }
 }
+
+LOGIN_URL = '/accounts/login/'
