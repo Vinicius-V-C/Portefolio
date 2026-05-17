@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'markdownify',
     'accounts',
     'sesame',
+    'artigos',
 ]
 
 MIDDLEWARE = [

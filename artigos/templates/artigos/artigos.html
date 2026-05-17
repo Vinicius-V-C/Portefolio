@@ -1,0 +1,31 @@
+<h1>Artigos</h1>
+
+<a href="{% url 'criar_artigo' %}">
+    Criar artigo
+</a>
+
+<hr>
+
+{% for artigo in artigos %}
+
+    <h2>{{ artigo.titulo }}</h2>
+
+    <p>{{ artigo.texto }}</p>
+
+    <p>
+        Autor:
+        {{ artigo.autor.username }}
+    </p>
+
+    <p>
+        Likes:
+        {{ artigo.likes.count }}
+    </p>
+
+    <hr>
+
+{% empty %}
+
+    <p>Nenhum artigo encontrado.</p>
+
+{% endfor %}
