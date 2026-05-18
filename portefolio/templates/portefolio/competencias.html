@@ -1,10 +1,11 @@
 {% extends 'portefolio/base.html' %}
 
+
 {% block content %}
 
 <h1>Competências</h1>
 
-<a href="{% url 'criar_competencia' %}">
+<a href="{% url 'nova_competencia' %}">
     <button>Criar Competência</button>
 </a>
 
@@ -16,11 +17,11 @@
 
         <h2>{{ competencia.nome }}</h2>
 
-        <a href="{% url 'editar_competencia' competencia.id %}">
+        <a href="{% url 'edita_competencia' competencia.id %}">
             <button>Editar</button>
         </a>
 
-        <a href="{% url 'apagar_competencia' competencia.id %}">
+        <a href="{% url 'apaga_competencia' competencia.id %}">
             <button>Apagar</button>
         </a>
 

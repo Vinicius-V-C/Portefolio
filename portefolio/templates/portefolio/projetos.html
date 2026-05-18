@@ -1,0 +1,30 @@
+{% extends 'portefolio/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<h2>Projetos</h2>
+
+<ul>
+
+    {% for projeto in projetos %}
+
+        <li>
+
+            {{ projeto.nome }}
+
+        </li>
+
+    {% empty %}
+
+        <li>
+            Nenhum projeto encontrado.
+        </li>
+
+    {% endfor %}
+
+</ul>
+
+{% endblock %}

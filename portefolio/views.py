@@ -1,18 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
 
 from .models import (
-    Licenciatura,
-    Docente,
-    UnidadeCurricular,
+    Projeto,
     Tecnologia,
     Competencia,
-    Projeto,
-    Formacao,
-    ExperienciaProfissional,
-    TFC,
-    MakingOf
+    Formacao
 )
+
 from .forms import (
     ProjetoForm,
     TecnologiaForm,
@@ -20,332 +14,405 @@ from .forms import (
     FormacaoForm
 )
 
+from django.contrib.auth.decorators import (
+    login_required,
+    user_passes_test
+)
 
 
+def gestor_portefolio(user):
 
-def licenciaturas_view(request):
-    licenciaturas = Licenciatura.objects.all()
-
-    return render(request, 'portefolio/licenciaturas.html', {
-        'licenciaturas': licenciaturas
-    })
+    return user.is_authenticated and user.groups.filter(
+        name='gestor-portefolio'
+    ).exists()
 
 
-def docentes_view(request):
-    docentes = Docente.objects.all()
-
-    return render(request, 'portefolio/docentes.html', {
-        'docentes': docentes
-    })
-
-
-def ucs_view(request):
-    ucs = UnidadeCurricular.objects.select_related(
-        'licenciatura'
-    ).prefetch_related(
-        'docentes'
-    )
-
-    return render(request, 'portefolio/ucs.html', {
-        'ucs': ucs
-    })
-
-
-def tecnologias_view(request):
-    tecnologias = Tecnologia.objects.all()
-
-    return render(request, 'portefolio/tecnologias.html', {
-        'tecnologias': tecnologias
-    })
-
-
-def competencias_view(request):
-    competencias = Competencia.objects.all()
-
-    return render(request, 'portefolio/competencias.html', {
-        'competencias': competencias
-    })
-
+# =========================
+# PROJETOS
+# =========================
 
 def projetos_view(request):
-    projetos = Projeto.objects.select_related(
-        'unidade_curricular'
-    ).prefetch_related(
-        'tecnologias',
-        'competencias'
+
+    projetos = Projeto.objects.all()
+
+    return render(
+        request,
+        'portefolio/projetos.html',
+        {
+            'projetos': projetos,
+            'is_gestor': gestor_portefolio(request.user)
+        }
     )
 
-    return render(request, 'portefolio/projetos.html', {
-        'projetos': projetos
-    })
-
-
-def formacoes_view(request):
-    formacoes = Formacao.objects.prefetch_related(
-        'competencias'
-    )
-
-    return render(request, 'portefolio/formacoes.html', {
-        'formacoes': formacoes
-    })
-
-
-def experiencias_view(request):
-    experiencias = ExperienciaProfissional.objects.prefetch_related(
-        'competencias'
-    )
-
-    return render(request, 'portefolio/experiencias.html', {
-        'experiencias': experiencias
-    })
-
-
-def tfcs_view(request):
-    tfcs = TFC.objects.all()
-
-    return render(request, 'portefolio/tfcs.html', {
-        'tfcs': tfcs
-    })
-
-
-def makingof_view(request):
-    makingofs = MakingOf.objects.select_related(
-        'projeto',
-        'tecnologia',
-        'unidade_curricular'
-    )
-
-    return render(request, 'portefolio/makingof.html', {
-        'makingofs': makingofs
-    })
 
 @login_required
-def criar_projeto(request):
+@user_passes_test(gestor_portefolio)
+def novo_projeto_view(request):
 
-    if request.method == 'POST':
-        form = ProjetoForm(request.POST, request.FILES)
+    form = ProjetoForm(
+        request.POST or None,
+        request.FILES or None
+    )
 
-        if form.is_valid():
-            form.save()
-            return redirect('projetos')
+    if form.is_valid():
 
-    else:
-        form = ProjetoForm()
+        form.save()
 
-    return render(request, 'portefolio/form.html', {
-        'form': form,
-        'titulo': 'Criar Projeto'
-    }) 
-
-@login_required
-def editar_projeto(request, projeto_id):
-
-    projeto = get_object_or_404(Projeto, id=projeto_id)
-
-    if request.method == 'POST':
-        form = ProjetoForm(request.POST, request.FILES, instance=projeto)
-
-        if form.is_valid():
-            form.save()
-            return redirect('projetos')
-
-    else:
-        form = ProjetoForm(instance=projeto)
-
-    return render(request, 'portefolio/form.html', {
-        'form': form,
-        'titulo': 'Editar Projeto'
-    })
-
-@login_required
-def apagar_projeto(request, projeto_id):
-
-    projeto = get_object_or_404(Projeto, id=projeto_id)
-
-    if request.method == 'POST':
-        projeto.delete()
         return redirect('projetos')
 
-    return render(request, 'portefolio/confirmar_delete.html', {
-        'objeto': projeto
-    })           
-
-@login_required
-def criar_tecnologia(request):
-
-    if request.method == 'POST':
-        form = TecnologiaForm(request.POST, request.FILES)
-
-        if form.is_valid():
-            form.save()
-            return redirect('tecnologias')
-
-    else:
-        form = TecnologiaForm()
-
-    return render(request, 'portefolio/form.html', {
-        'form': form,
-        'titulo': 'Criar Tecnologia'
-    })
+    return render(
+        request,
+        'portefolio/form.html',
+        {'form': form}
+    )
 
 
 @login_required
-def editar_tecnologia(request, tecnologia_id):
+@user_passes_test(gestor_portefolio)
+def edita_projeto_view(request, projeto_id):
 
-    tecnologia = get_object_or_404(Tecnologia, id=tecnologia_id)
+    projeto = get_object_or_404(
+        Projeto,
+        id=projeto_id
+    )
 
-    if request.method == 'POST':
-        form = TecnologiaForm(request.POST, request.FILES, instance=tecnologia)
+    form = ProjetoForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=projeto
+    )
 
-        if form.is_valid():
-            form.save()
-            return redirect('tecnologias')
+    if form.is_valid():
 
-    else:
-        form = TecnologiaForm(instance=tecnologia)
+        form.save()
 
-    return render(request, 'portefolio/form.html', {
-        'form': form,
-        'titulo': 'Editar Tecnologia'
-    })
+        return redirect('projetos')
+
+    return render(
+        request,
+        'portefolio/form.html',
+        {
+            'form': form,
+            'projeto': projeto
+        }
+    )
 
 
 @login_required
-def apagar_tecnologia(request, tecnologia_id):
+@user_passes_test(gestor_portefolio)
+def apaga_projeto_view(request, projeto_id):
 
-    tecnologia = get_object_or_404(Tecnologia, id=tecnologia_id)
+    projeto = get_object_or_404(
+        Projeto,
+        id=projeto_id
+    )
 
     if request.method == 'POST':
-        tecnologia.delete()
+
+        projeto.delete()
+
+        return redirect('projetos')
+
+    return render(
+        request,
+        'portefolio/confirmar_delete.html',
+        {'objeto': projeto}
+    )
+
+
+# =========================
+# TECNOLOGIAS
+# =========================
+
+def tecnologias_view(request):
+
+    tecnologias = Tecnologia.objects.all()
+
+    return render(
+        request,
+        'portefolio/tecnologias.html',
+        {
+            'tecnologias': tecnologias,
+            'is_gestor': gestor_portefolio(request.user)
+        }
+    )
+
+
+@login_required
+@user_passes_test(gestor_portefolio)
+def nova_tecnologia_view(request):
+
+    form = TecnologiaForm(
+        request.POST or None,
+        request.FILES or None
+    )
+
+    if form.is_valid():
+
+        form.save()
+
         return redirect('tecnologias')
 
-    return render(request, 'portefolio/confirmar_delete.html', {
-        'objeto': tecnologia
-    })
-
-@login_required
-def criar_competencia(request):
-
-    if request.method == 'POST':
-        form = CompetenciaForm(request.POST)
-
-        if form.is_valid():
-            form.save()
-            return redirect('competencias')
-
-    else:
-        form = CompetenciaForm()
-
-    return render(request, 'portefolio/form.html', {
-        'form': form,
-        'titulo': 'Criar Competência'
-    })
+    return render(
+        request,
+        'portefolio/form.html',
+        {'form': form}
+    )
 
 
 @login_required
-def editar_competencia(request, competencia_id):
+@user_passes_test(gestor_portefolio)
+def edita_tecnologia_view(request, tecnologia_id):
 
-    competencia = get_object_or_404(Competencia, id=competencia_id)
+    tecnologia = get_object_or_404(
+        Tecnologia,
+        id=tecnologia_id
+    )
 
-    if request.method == 'POST':
-        form = CompetenciaForm(request.POST, instance=competencia)
+    form = TecnologiaForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=tecnologia
+    )
 
-        if form.is_valid():
-            form.save()
-            return redirect('competencias')
+    if form.is_valid():
 
-    else:
-        form = CompetenciaForm(instance=competencia)
+        form.save()
 
-    return render(request, 'portefolio/form.html', {
-        'form': form,
-        'titulo': 'Editar Competência'
-    })
+        return redirect('tecnologias')
+
+    return render(
+        request,
+        'portefolio/form.html',
+        {'form': form}
+    )
 
 
 @login_required
-def apagar_competencia(request, competencia_id):
+@user_passes_test(gestor_portefolio)
+def apaga_tecnologia_view(request, tecnologia_id):
 
-    competencia = get_object_or_404(Competencia, id=competencia_id)
+    tecnologia = get_object_or_404(
+        Tecnologia,
+        id=tecnologia_id
+    )
 
     if request.method == 'POST':
-        competencia.delete()
+
+        tecnologia.delete()
+
+        return redirect('tecnologias')
+
+    return render(
+        request,
+        'portefolio/confirmar_delete.html',
+        {'objeto': tecnologia}
+    )
+
+
+# =========================
+# COMPETÊNCIAS
+# =========================
+
+def competencias_view(request):
+
+    competencias = Competencia.objects.all()
+
+    return render(
+        request,
+        'portefolio/competencias.html',
+        {
+            'competencias': competencias,
+            'is_gestor': gestor_portefolio(request.user)
+        }
+    )
+
+
+@login_required
+@user_passes_test(gestor_portefolio)
+def nova_competencia_view(request):
+
+    form = CompetenciaForm(request.POST or None)
+
+    if form.is_valid():
+
+        form.save()
+
         return redirect('competencias')
 
-    return render(request, 'portefolio/confirmar_delete.html', {
-        'objeto': competencia
-    })
-
-@login_required
-def criar_formacao(request):
-
-    if request.method == 'POST':
-        form = FormacaoForm(request.POST)
-
-        if form.is_valid():
-            form.save()
-            return redirect('formacoes')
-
-    else:
-        form = FormacaoForm()
-
-    return render(request, 'portefolio/form.html', {
-        'form': form,
-        'titulo': 'Criar Formação'
-    })
+    return render(
+        request,
+        'portefolio/form.html',
+        {'form': form}
+    )
 
 
 @login_required
-def editar_formacao(request, formacao_id):
+@user_passes_test(gestor_portefolio)
+def edita_competencia_view(request, competencia_id):
 
-    formacao = get_object_or_404(Formacao, id=formacao_id)
+    competencia = get_object_or_404(
+        Competencia,
+        id=competencia_id
+    )
 
-    if request.method == 'POST':
-        form = FormacaoForm(request.POST, instance=formacao)
+    form = CompetenciaForm(
+        request.POST or None,
+        instance=competencia
+    )
 
-        if form.is_valid():
-            form.save()
-            return redirect('formacoes')
+    if form.is_valid():
 
-    else:
-        form = FormacaoForm(instance=formacao)
+        form.save()
 
-    return render(request, 'portefolio/form.html', {
-        'form': form,
-        'titulo': 'Editar Formação'
-    })
+        return redirect('competencias')
+
+    return render(
+        request,
+        'portefolio/form.html',
+        {'form': form}
+    )
 
 
 @login_required
-def apagar_formacao(request, formacao_id):
+@user_passes_test(gestor_portefolio)
+def apaga_competencia_view(request, competencia_id):
 
-    formacao = get_object_or_404(Formacao, id=formacao_id)
+    competencia = get_object_or_404(
+        Competencia,
+        id=competencia_id
+    )
 
     if request.method == 'POST':
-        formacao.delete()
+
+        competencia.delete()
+
+        return redirect('competencias')
+
+    return render(
+        request,
+        'portefolio/confirmar_delete.html',
+        {'objeto': competencia}
+    )
+
+
+# =========================
+# FORMAÇÕES
+# =========================
+
+def formacoes_view(request):
+
+    formacoes = Formacao.objects.all()
+
+    return render(
+        request,
+        'portefolio/formacoes.html',
+        {
+            'formacoes': formacoes,
+            'is_gestor': gestor_portefolio(request.user)
+        }
+    )
+
+
+@login_required
+@user_passes_test(gestor_portefolio)
+def nova_formacao_view(request):
+
+    form = FormacaoForm(request.POST or None)
+
+    if form.is_valid():
+
+        form.save()
+
         return redirect('formacoes')
 
-    return render(request, 'portefolio/confirmar_delete.html', {
-        'objeto': formacao
-    })
-    
-def sobre(request):
-    return render(request, 'portefolio/sobre.html')
-        
+    return render(
+        request,
+        'portefolio/form.html',
+        {'form': form}
+    )
 
-def makingof(request):
 
-    texto = """
-# Título Markdown
+@login_required
+@user_passes_test(gestor_portefolio)
+def edita_formacao_view(request, formacao_id):
 
-## Sub-título
+    formacao = get_object_or_404(
+        Formacao,
+        id=formacao_id
+    )
 
-- item 1
-- item 2
+    form = FormacaoForm(
+        request.POST or None,
+        instance=formacao
+    )
 
-**bold**
+    if form.is_valid():
+
+        form.save()
+
+        return redirect('formacoes')
+
+    return render(
+        request,
+        'portefolio/form.html',
+        {'form': form}
+    )
+
+
+@login_required
+@user_passes_test(gestor_portefolio)
+def apaga_formacao_view(request, formacao_id):
+
+    formacao = get_object_or_404(
+        Formacao,
+        id=formacao_id
+    )
+
+    if request.method == 'POST':
+
+        formacao.delete()
+
+        return redirect('formacoes')
+
+    return render(
+        request,
+        'portefolio/confirmar_delete.html',
+        {'objeto': formacao}
+    )
+
+
+# =========================
+# SOBRE
+# =========================
+
+def sobre_view(request):
+
+    tecnologias = Tecnologia.objects.all()
+
+    texto_markdown = """
+## Problemas encontrados
+- TemplateDoesNotExist
+- Erros de migrations
+- Problemas com ForeignKey
+
+## Aprendizagens
+- Compreensão do MVT
+- Uso de migrations
+- Uso do markdownify
+
+## Tecnologias usadas
+- Django
+- HTML
+- CSS
+- GitHub
 """
 
-    return render(request,
-                  'portefolio/makingof.html',
-                  {'texto': texto})    
+    return render(
+        request,
+        'portefolio/sobre.html',
+        {
+            'tecnologias': tecnologias,
+            'texto_markdown': texto_markdown,
+        }
+    )

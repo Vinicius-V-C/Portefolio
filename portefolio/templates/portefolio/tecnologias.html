@@ -1,10 +1,11 @@
 {% extends 'portefolio/base.html' %}
 
+
 {% block content %}
 
 <h1>Tecnologias</h1>
 
-<a href="{% url 'criar_tecnologia' %}">
+<a href="{% url 'nova_tecnologia' %}">
     <button>Criar Tecnologia</button>
 </a>
 
@@ -16,11 +17,11 @@
 
         <h2>{{ tecnologia.nome }}</h2>
 
-        <a href="{% url 'editar_tecnologia' tecnologia.id %}">
+        <a href="{% url 'edita_tecnologia' tecnologia.id %}">
             <button>Editar</button>
         </a>
 
-        <a href="{% url 'apagar_tecnologia' tecnologia.id %}">
+        <a href="{% url 'apaga_tecnologia' tecnologia.id %}">
             <button>Apagar</button>
         </a>
 

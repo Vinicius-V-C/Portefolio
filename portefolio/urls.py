@@ -3,29 +3,136 @@ from . import views
 
 urlpatterns = [
 
-    path('licenciaturas/', views.licenciaturas_view, name='licenciaturas'),
-    path('docentes/', views.docentes_view, name='docentes'),
-    path('ucs/', views.ucs_view, name='ucs'),
-    path('tecnologias/', views.tecnologias_view, name='tecnologias'),
-    path('competencias/', views.competencias_view, name='competencias'),
-    path('projetos/', views.projetos_view, name='projetos'),
-    path('formacoes/', views.formacoes_view, name='formacoes'),
-    path('experiencias/', views.experiencias_view, name='experiencias'),
-    path('tfcs/', views.tfcs_view, name='tfcs'),
-    path('makingof/', views.makingof_view, name='makingof'),
-    path('projetos/criar/', views.criar_projeto, name='criar_projeto'),
-    path('projetos/editar/<int:projeto_id>/', views.editar_projeto, name='editar_projeto'),
-    path('projetos/apagar/<int:projeto_id>/', views.apagar_projeto, name='apagar_projeto'),
-    path('tecnologias/criar/', views.criar_tecnologia, name='criar_tecnologia'),
-    path('tecnologias/editar/<int:tecnologia_id>/', views.editar_tecnologia, name='editar_tecnologia'),
-    path('tecnologias/apagar/<int:tecnologia_id>/', views.apagar_tecnologia, name='apagar_tecnologia'),
-    path('competencias/criar/', views.criar_competencia, name='criar_competencia'),
-    path('competencias/editar/<int:competencia_id>/', views.editar_competencia, name='editar_competencia'),
-    path('competencias/apagar/<int:competencia_id>/', views.apagar_competencia, name='apagar_competencia'),
-    path('formacoes/criar/', views.criar_formacao, name='criar_formacao'),
-    path('formacoes/editar/<int:formacao_id>/', views.editar_formacao, name='editar_formacao'),
-    path('formacoes/apagar/<int:formacao_id>/', views.apagar_formacao, name='apagar_formacao'),
-    path('sobre/', views.sobre, name='sobre'),
-    path('makingof/', views.makingof, name='makingof'),
+    # =========================
+    # HOME
+    # =========================
+
+    path(
+        '',
+        views.projetos_view,
+        name='home_portefolio'
+    ),
+
+    # =========================
+    # PROJETOS
+    # =========================
+
+    path(
+        'projetos/',
+        views.projetos_view,
+        name='projetos'
+    ),
+
+    path(
+        'projeto/novo/',
+        views.novo_projeto_view,
+        name='novo_projeto'
+    ),
+
+    path(
+        'projeto/<int:projeto_id>/edita/',
+        views.edita_projeto_view,
+        name='edita_projeto'
+    ),
+
+    path(
+        'projeto/<int:projeto_id>/apaga/',
+        views.apaga_projeto_view,
+        name='apaga_projeto'
+    ),
+
+    # =========================
+    # TECNOLOGIAS
+    # =========================
+
+    path(
+        'tecnologias/',
+        views.tecnologias_view,
+        name='tecnologias'
+    ),
+
+    path(
+        'tecnologia/novo/',
+        views.nova_tecnologia_view,
+        name='nova_tecnologia'
+    ),
+
+    path(
+        'tecnologia/<int:tecnologia_id>/edita/',
+        views.edita_tecnologia_view,
+        name='edita_tecnologia'
+    ),
+
+    path(
+        'tecnologia/<int:tecnologia_id>/apaga/',
+        views.apaga_tecnologia_view,
+        name='apaga_tecnologia'
+    ),
+
+    # =========================
+    # COMPETÊNCIAS
+    # =========================
+
+    path(
+        'competencias/',
+        views.competencias_view,
+        name='competencias'
+    ),
+
+    path(
+        'competencia/novo/',
+        views.nova_competencia_view,
+        name='nova_competencia'
+    ),
+
+    path(
+        'competencia/<int:competencia_id>/edita/',
+        views.edita_competencia_view,
+        name='edita_competencia'
+    ),
+
+    path(
+        'competencia/<int:competencia_id>/apaga/',
+        views.apaga_competencia_view,
+        name='apaga_competencia'
+    ),
+
+    # =========================
+    # FORMAÇÕES
+    # =========================
+
+    path(
+        'formacoes/',
+        views.formacoes_view,
+        name='formacoes'
+    ),
+
+    path(
+        'formacao/novo/',
+        views.nova_formacao_view,
+        name='nova_formacao'
+    ),
+
+    path(
+        'formacao/<int:formacao_id>/edita/',
+        views.edita_formacao_view,
+        name='edita_formacao'
+    ),
+
+    path(
+        'formacao/<int:formacao_id>/apaga/',
+        views.apaga_formacao_view,
+        name='apaga_formacao'
+    ),
+
+    # =========================
+    # SOBRE
+    # =========================
+
+    path(
+        'sobre/',
+        views.sobre_view,
+        name='sobre'
+    ),
 
 ]
